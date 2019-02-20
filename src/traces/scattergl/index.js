@@ -75,7 +75,7 @@ function calc(gd, trace) {
     // and it is also
     if(xa.type !== 'log' && ya.type !== 'log') {
         // FIXME: delegate this to webworker
-        stash.tree = cluster(positions);
+        stash.tree = cluster(positions, {maxDepth: 15});
     } else {
         var ids = stash.ids = new Array(len);
         for(i = 0; i < len; i++) {
@@ -111,7 +111,7 @@ function calc(gd, trace) {
 
     // FIXME: organize it in a more appropriate manner, probably in sceneOptions
     // put point-cluster instance for optimized regl calc
-    if(opts.marker && len >= TOO_MANY_POINTS) {
+    if(opts.marker) {
         opts.marker.cluster = stash.tree;
     }
 
